@@ -31,6 +31,12 @@ export const BlogProvider = ({ children }) => {
     setBlogPosts([...blogPosts, {title: `Blog Post #${blogPosts.length + 1}`}])
   };
 
+  // I can make a couple more helper functions and call them 
+  // from their corresponding screens EditScreen & DeleteScreen. 
+  // For example:
+  // const editBlogPost = () => {}
+  // const deleteBlogPost = () => {} 
+
   return (
     <BlogContext.Provider value={{data: blogPosts, addBlogPost: addBlogPost}}>
       {children}
