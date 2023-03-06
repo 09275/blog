@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 /*
   Note: Props are used to pass data from a parent
@@ -22,8 +22,17 @@ const BlogContext = React.createContext();
   inside the context (in this case named BlogContext).
 */
 export const BlogProvider = ({ children }) => {
+  const [blogPosts, setBlogPosts] = useState([]);
+
+  // If I will use the 'setBlogPosts' it is going to replace
+  // completely the 'blogPosts'. But I want to add to the 
+  // 'blogPosts' not replace it.
+  const addBlogPost = () => {
+    setBlogPosts([...blogPosts, {title: `Blog Post #${blogPosts.length + 1}`}])
+  };
+
   return (
-    <BlogContext.Provider value={15}>
+    <BlogContext.Provider value={{data: blogPosts, addBlogPost: addBlogPost}}>
       {children}
     </BlogContext.Provider>
   );
