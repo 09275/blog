@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useReducer } from 'react';
 
 /*
   Note: Props are used to pass data from a parent
@@ -12,6 +12,18 @@ import React, { useState } from 'react';
 // all the children (including the deeply nested ones).
 const BlogContext = React.createContext();
 
+const blogReducer = (state, action) => {
+  switch (action.type) {
+    case 'add_blogpost': {
+      return [
+        ...state, {title: `Blog Post #${state.length + 1}`}
+      ];
+    }
+    default: {
+      return state;
+    }
+  }
+};
 // BlogProvider is the component that wraps everything
 // inside it (including App.js). This way it can send
 // information directly to any child component it needs.
@@ -22,17 +34,14 @@ const BlogContext = React.createContext();
   inside the context (in this case named BlogContext).
 */
 export const BlogProvider = ({ children }) => {
-  const [blogPosts, setBlogPosts] = useState([]);
+  const [blogPosts, dispatch] = useReducer(blogReducer, []);
 
-  // If I will use the 'setBlogPosts' it is going to replace
-  // completely the 'blogPosts'. But I want to add to the 
-  // 'blogPosts' not replace it.
   const addBlogPost = () => {
-    setBlogPosts([...blogPosts, {title: `Blog Post #${blogPosts.length + 1}`}])
+    dispatch({type: 'add_blogpost'});
   };
 
   return (
-    <BlogContext.Provider value={{data: blogPosts, addBlogPost: addBlogPost}}>
+    <BlogContext.Provider value={{data: blogPosts, addBlogPost}}>
       {children}
     </BlogContext.Provider>
   );
