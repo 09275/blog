@@ -22,7 +22,6 @@ const IndexScreen = () => {
     </View>
   );
 };
-
 const styles = StyleSheet.create({});
 
 export default IndexScreen;

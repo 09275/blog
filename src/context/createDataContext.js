@@ -17,15 +17,23 @@ export default (reducer, actions, initialState) => {
   const Provider = ({ children }) => {
     const [state, dispatch] = useReducer(reducer, initialState);
 
-    //actions === { addBlogPost: (dispatch) => {return () => {} }}
+    //actions === { addBlogPost: (dispatch) => {return () => {dispatch({type: 'add_blogpost'});}} }
+    //console.log(actions);
+    /*
+      The idea is to loop through the 'actions' object. For each key 
+      (in this case only the "addBlogPost") I am going to call the 
+      function with the 'dispatch' argument and that is going to return
+      the anonymous function () => {dispatch({type: 'add_blogpost'})
+    */
     const boundActions = {};
     for (let key in actions) {
       // key === 'addBlogPost'
-      // boundActions.addBlogPost = (dispatch) => {return () => {}}
+      // boundActions.addBlogPost = () => {dispatch({type: 'add_blogpost'});
       boundActions[key] = actions[key](dispatch);
+      //console.log(boundActions);
     };
 
-    // Inside value I could use {data: state} or 
+    // Inside the 'value' I could use {data: state} or 
     // just {state: state} which is the same as {state}
     // since the {key:value} pair is the same.
     return (
@@ -34,7 +42,6 @@ export default (reducer, actions, initialState) => {
       </Context.Provider>
     );
   };
-
   return { Context, Provider };
 
 };
