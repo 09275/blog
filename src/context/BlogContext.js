@@ -3,9 +3,16 @@ import createDataContext from './createDataContext';
 
 const blogReducer = (state, action) => {
   switch (action.type) {
+    case 'delete_blogpost': {
+      return state.filter((blogPost) => blogPost.id !== action.payload);
+    }
     case 'add_blogpost': {
       return [
-        ...state, {title: `Blog Post #${state.length + 1}`}
+        ...state, 
+        {
+          id: Math.floor(Math.random() * 99999),
+          title: `Blog Post #${state.length + 1}`
+        }
       ];
     }
     default: {
@@ -22,10 +29,16 @@ const addBlogPost = (dispatch) => {
   };
 };
 
+const deleteBlogPost = (dispatch) => {
+  return (id) => {
+    dispatch({type: 'delete_blogpost', payload: id});
+  };
+};
+
 // Destructuring 'Context' and 'Provider'
 // Also notice that I pass 'addBlogPost' inside an object
 export const { Context, Provider } = createDataContext(
   blogReducer,
-  {addBlogPost},
+  {addBlogPost, deleteBlogPost},
   [] 
 );
