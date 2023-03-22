@@ -21,14 +21,15 @@ export default (reducer, actions, initialState) => {
     //console.log(actions);
     /*
       The idea is to loop through the 'actions' object. For each key 
-      (in this case only the "addBlogPost") I am going to call the 
+      (for example "addBlogPost") I am going to call the 
       function with the 'dispatch' argument and that is going to return
       the anonymous function () => {dispatch({type: 'add_blogpost'})
     */
     const boundActions = {};
     for (let key in actions) {
-      // key === 'addBlogPost'
+      // key === 'addBlogPost' || 'deleteBlogPost'
       // boundActions.addBlogPost = () => {dispatch({type: 'add_blogpost'});
+      // The 'actions[key](dispatch)' is like saying 'function addBlogPost(dispatch)'
       boundActions[key] = actions[key](dispatch);
       //console.log(boundActions);
     };

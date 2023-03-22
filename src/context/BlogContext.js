@@ -36,7 +36,8 @@ const deleteBlogPost = (dispatch) => {
 };
 
 // Destructuring 'Context' and 'Provider'
-// Also notice that I pass 'addBlogPost' inside an object
+// Also notice that I pass 'addBlogPost' and 'deleteBlogPost' 
+// inside an object
 export const { Context, Provider } = createDataContext(
   blogReducer,
   {addBlogPost, deleteBlogPost},
