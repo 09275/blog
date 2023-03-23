@@ -11,7 +11,8 @@ const blogReducer = (state, action) => {
         ...state, 
         {
           id: Math.floor(Math.random() * 99999),
-          title: `Blog Post #${state.length + 1}`
+          title: action.payload.title,
+          content: action.payload.content
         }
       ];
     }
@@ -24,8 +25,8 @@ const blogReducer = (state, action) => {
 // I need to pass 'dispatch' as an argument, so the 'addBlogPost'
 // can use it when it is passed to 'createDataContext'
 const addBlogPost = (dispatch) => {
-  return () => {
-    dispatch({type: 'add_blogpost'});
+  return (title, content) => {
+    dispatch({type: 'add_blogpost', payload: {title: title, content:content}});
   };
 };
 
