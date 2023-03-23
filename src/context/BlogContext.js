@@ -25,8 +25,9 @@ const blogReducer = (state, action) => {
 // I need to pass 'dispatch' as an argument, so the 'addBlogPost'
 // can use it when it is passed to 'createDataContext'
 const addBlogPost = (dispatch) => {
-  return (title, content) => {
+  return (title, content, callback) => {
     dispatch({type: 'add_blogpost', payload: {title: title, content:content}});
+    callback();
   };
 };
 

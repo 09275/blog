@@ -32,19 +32,9 @@ const CreateScreen = ({navigation}) => {
       <Button 
         title="Add Blog Post" 
         onPress={() => {
-          addBlogPost(title, content);
-          // This is a valid way but not very efficient.
-          // For example lets say that instead of just updating
-          // the state I want to make a network request to some API.
-          // Then maybe I want to wait to get a response that my
-          // blogpost has been successfuly created on that ouside API
-          // before I navigate the user to the 'Index' page.
-          // So if I decide to add some functionality to save this 
-          // blogpost to an API, I would not want to immediately call 
-          // 'navigate' after calling 'addBlogPost' because it would
-          // propably take some time before I get a response from the 
-          // API.
-          navigation.navigate('Index');
+          addBlogPost(title, content, () => {
+            navigation.navigate('Index');
+          });
         }}
       />
     </View>
