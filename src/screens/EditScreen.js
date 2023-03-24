@@ -11,7 +11,7 @@ const EditScreen = ({ navigation }) => {
   );
 
   // Notice that the initial state must be the title and 
-  // the content of the blogPost I am going to edit.
+  // the content of the blogPost I am going to edit
   const [title, setTitle] = useState(blogPost.title);
   const [content, setContent] = useState(blogPost.content);
 
