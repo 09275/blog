@@ -18,7 +18,15 @@ const EditScreen = ({ navigation }) => {
   return (
     <View>
       <Text>Edit Title:</Text>
-      <TextInput value={title} onChangeText={(newTitle) => setTitle(newTitle)}/>
+      <TextInput 
+        value={title} 
+        onChangeText={(newTitle) => setTitle(newTitle)}
+      />
+      <Text>Edit Content:</Text>
+      <TextInput 
+        value={content} 
+        onChangeText={(newContent) => setContent(newContent)}
+      />
     </View>
   );
 };
