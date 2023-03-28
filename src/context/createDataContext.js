@@ -30,6 +30,7 @@ export default (reducer, actions, initialState) => {
       // key === 'addBlogPost' || 'deleteBlogPost'
       // boundActions.addBlogPost = () => {dispatch({type: 'add_blogpost'});
       // The 'actions[key](dispatch)' is like saying 'function addBlogPost(dispatch)'
+      // It can also be written using (.) dot notation like 'actions.key(dispatch)'
       boundActions[key] = actions[key](dispatch);
       //console.log(boundActions);
     };
